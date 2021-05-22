@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <!--dialog风格-->
+    <style name="BaseDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">#333333</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+    <style name="LoadingDialog" parent="BaseDialog">
+        <item name="colorAccent">#333333</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="BaseBottomDialog" parent="BaseDialog">
+        <item name="android:windowAnimationStyle">@style/bottomAnim</item>
+    </style>
+    <style name="bottomAnim">
+        <item name="android:windowEnterAnimation">@anim/bottom_dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_dialog_exit</item>
+    </style>
+    <!--dialog 可选颜色-->
+    <color name="baseDialogMainColor">@color/baseGreen</color>
+    <color name="baseDialogBackgroundColor">@color/baseWhite</color>
+    <color name="baseDialogLineColor">#c9c9c9</color>
+    <color name="baseDialogTextColor">#333</color>
+    <color name="baseDialogTextColor2">#999999</color>
+    <color name="baseDialogNormalColor">@color/baseWhite</color>
+    <color name="baseDialogSelectedColor">#c9c9c9</color>
+    <!--dialog 字体大小-->
+    <dimen name="baseDialogTitle">18sp</dimen>
+    <dimen name="baseDialogContent">16sp</dimen>
+    <dimen name="baseDialogContent2">12sp</dimen>
+    <color name="baseWhite">#ffffff</color>
+    <color name="baseGreen">#1CC42F</color>
+
+    <!--color颜色-->
+    <color name="white">#FFFFFF</color>
+    <color name="common_red">#FF4C44</color>
+    <color name="common_title">#161F29</color>
+    <color name="common_black">#000000</color>
+
+    <!--dimen 尺寸-->
+    <dimen name="common_title">16sp</dimen>
+    <dimen name="common_margin">15dp</dimen>
+    <dimen name="common_big_title">18sp</dimen>
+
+    <!--string 字符串-->
+    <string name="common_request_error_tip">Data Error,Please Retry</string>
+    <string name="common_network_error_tip">Network Error,Please Retry</string>
+</resources>

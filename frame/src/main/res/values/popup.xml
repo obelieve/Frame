@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="config_pop_duration">200</integer>
+    <color name="colorWeChat">#393a3f</color>
+    <color name="colorAliPay">#1b82d1</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_bg">#22000000</color>
+
+    <style name="popup_style">
+        <item name="android:windowEnterAnimation">@anim/popup_style_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_style_hide</item>
+    </style>
+    <style name="popup_shadow_style">
+        <item name="android:windowEnterAnimation">@anim/popup_shadow_style_show</item>
+        <item name="android:windowExitAnimation">@anim/popup_shadow_style_hide</item>
+    </style>
+</resources>

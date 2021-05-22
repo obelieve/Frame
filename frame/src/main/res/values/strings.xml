@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">frame</string>
+    <string name="load_error">Load Error, Retry Please</string>
+    <string name="load_no_data">No More Data</string>
+    <string name="load_loading">Loading..</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="Done">Done</string>
+    <string name="retry">Retry</string>
+    <string name="done">Done</string>
+    <string name="empty_data_tips">no data</string>
+    <string name="get_it">get it</string>
+    <string name="sign_in_first_please">sign in first please</string>
+    <string name="sign_in">Sign in</string>
+</resources>
