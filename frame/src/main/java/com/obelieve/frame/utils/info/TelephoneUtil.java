@@ -1,5 +1,6 @@
 package com.obelieve.frame.utils.info;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -16,9 +17,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.i18n.phonenumbers.PhoneNumberUtil;
-import com.google.i18n.phonenumbers.Phonenumber;
 import com.obelieve.frame.utils.storage.SPUtil;
 
 import java.io.BufferedReader;
@@ -383,6 +381,7 @@ public class TelephoneUtil {
      * @param context
      * @return
      */
+    @SuppressLint("MissingPermission")
     @RequiresPermission(android.Manifest.permission.READ_PHONE_STATE)
     public static String getDeviceId(Context context) {
         String deviceId = SPUtil.getInstance().getString(KEY_DEVICE_ID, "");
@@ -434,16 +433,6 @@ public class TelephoneUtil {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static boolean isMatched(int countryCode, CharSequence num) {
-        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-        try {
-            Phonenumber.PhoneNumber numberProto = phoneUtil.parse("+" + countryCode + num, String.valueOf(countryCode));
-            return phoneUtil.isValidNumber(numberProto) && phoneUtil.getNumberType(numberProto) == PhoneNumberUtil.PhoneNumberType.MOBILE;
-        } catch (Exception e) {
         }
         return false;
     }
