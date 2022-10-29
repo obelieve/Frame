@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:stateListAnimator="@null"
-            android:text="@string/cancel"
+            android:text="@string/frame_cancel"
             android:textColor="@color/baseDialogTextColor2"
             android:textSize="@dimen/baseDialogContent" />
 
@@ -52,7 +52,7 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:stateListAnimator="@null"
-            android:text="@string/confirm"
+            android:text="@string/frame_confirm"
             android:textColor="@color/baseDialogMainColor"
             android:textSize="@dimen/baseDialogContent" />
     </LinearLayout>

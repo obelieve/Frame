@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewbinding.ViewBinding;
 
 import com.obelieve.frame.R;
@@ -26,10 +28,11 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 
-public abstract class ApiBaseFragment<T extends ViewBinding> extends Fragment implements ICommonToolbar {
+public abstract class ApiBaseFragment<T extends ViewBinding,VM extends ViewModel> extends Fragment implements ICommonToolbar {
 
     protected boolean mInitOnce = true;
     protected T mViewBinding;
+    protected VM mViewModel;
     protected Context mContext;
     protected Activity mActivity;
 
@@ -49,6 +52,7 @@ public abstract class ApiBaseFragment<T extends ViewBinding> extends Fragment im
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         createLayoutView(container);
+        createViewModel();
         return mViewBinding.getRoot();
     }
 
@@ -63,6 +67,15 @@ public abstract class ApiBaseFragment<T extends ViewBinding> extends Fragment im
         }
     }
 
+    private void createViewModel() {
+        Type superclass = getClass().getGenericSuperclass();
+        Type[] types = ((ParameterizedType) superclass).getActualTypeArguments();
+        if(types.length==2){
+            Class<VM> aClass = (Class<VM>) types[1];
+            mViewModel = (VM) ViewModelProviders.of(this).get(aClass);
+        }
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -71,16 +84,18 @@ public abstract class ApiBaseFragment<T extends ViewBinding> extends Fragment im
             mInitOnce = false;
             initViewOnce();
         }
+        initViewModel();
     }
 
     protected abstract void initView();
+
+    protected void initViewModel(){}
 
     protected void initViewOnce(){}
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mViewBinding = null;
     }
 
     @Override
@@ -92,7 +107,7 @@ public abstract class ApiBaseFragment<T extends ViewBinding> extends Fragment im
         TextView right_tip = getView().findViewById(R.id.right_tip);
         if (style == Style.DARK) {
             if (left_icon != null) {
-                left_icon.setImageResource(R.drawable.ic_back_black);
+                left_icon.setImageResource(R.drawable.frame_ic_back_black);
             }
             if (title != null) {
                 title.setTextColor(getResources().getColor(R.color.common_black));
@@ -105,7 +120,7 @@ public abstract class ApiBaseFragment<T extends ViewBinding> extends Fragment im
             }
         } else if (style == Style.LIGHT) {
             if (left_icon != null) {
-                left_icon.setImageResource(R.drawable.ic_back_white);
+                left_icon.setImageResource(R.drawable.frame_ic_back_white);
             }
             if (title != null) {
                 title.setTextColor(getResources().getColor(R.color.white));
@@ -154,7 +169,7 @@ public abstract class ApiBaseFragment<T extends ViewBinding> extends Fragment im
         View left_layout = getView().findViewById(R.id.left_layout);
         if (left_layout != null) {
             ImageView left_icon = getView().findViewById(R.id.left_icon);
-            left_icon.setImageResource(R.drawable.ic_back_black);
+            left_icon.setImageResource(R.drawable.frame_ic_back_black);
             left_layout.setOnClickListener(onClickListener);
         }
     }

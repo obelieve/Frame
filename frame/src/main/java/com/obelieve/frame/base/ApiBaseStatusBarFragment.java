@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.lifecycle.ViewModel;
 import androidx.viewbinding.ViewBinding;
 
 import com.obelieve.frame.utils.StatusBarUtil;
@@ -11,7 +12,7 @@ import com.obelieve.frame.utils.StatusBarUtil;
 /**
  * 状态栏透明时，控制状态栏Light切换方式 Fragment
  */
-public abstract class ApiBaseStatusBarFragment<T extends ViewBinding> extends ApiBaseFragment<T> implements IBaseStatusBar {
+public abstract class ApiBaseStatusBarFragment<T extends ViewBinding,VM extends ViewModel> extends ApiBaseFragment<T,VM> implements IBaseStatusBar {
 
     @Override
     protected void initView() {

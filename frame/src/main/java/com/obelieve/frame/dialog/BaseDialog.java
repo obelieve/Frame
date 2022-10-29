@@ -5,11 +5,12 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.obelieve.frame.R;
 
 
-public class BaseDialog {
+public abstract class BaseDialog {
 
     protected View mContentView;
     protected Dialog mDialog;
@@ -22,6 +23,15 @@ public class BaseDialog {
     public BaseDialog(Activity activity, int style) {
         mActivity = activity;
         mDialog = new Dialog(activity, style);
+        if(configFullScreen()){
+            int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            mDialog.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
+        }
     }
 
     public Activity getActivity() {
@@ -71,7 +81,13 @@ public class BaseDialog {
     }
 
     public void show() {
+        if(configFullScreen()){
+            mDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        }
         mDialog.show();
+        if(configFullScreen()){
+            mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        }
     }
 
     public void dismiss() {
@@ -84,5 +100,9 @@ public class BaseDialog {
 
     public boolean isShowing() {
         return mDialog.isShowing();
+    }
+
+    public boolean configFullScreen(){
+        return false;
     }
 }

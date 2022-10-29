@@ -65,7 +65,7 @@ public class GlideRoundTransform extends BitmapTransformation {
     private void paintGif(Bitmap oldbitmap, Canvas canvas) {
         int width = oldbitmap.getWidth();
         int height = oldbitmap.getHeight();
-        Bitmap gifbmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_gif);
+        Bitmap gifbmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.frame_ic_gif);
         int gifbmpWidth = gifbmp.getWidth();
         int gifbmpHeight = gifbmp.getHeight();
 

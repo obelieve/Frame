@@ -16,6 +16,8 @@ import retrofit2.Retrofit;
  */
 public class HttpUtil {
 
+    private static final int CONNECT_TIMEOUT_SECONDS = 10;
+
     private static final int READ_TIMEOUT_SECONDS = 30;
 
     private static final int WRITE_TIMEOUT_SECONDS = 30;
@@ -90,6 +92,7 @@ public class HttpUtil {
                 }
             }
             OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
+                    .connectTimeout(CONNECT_TIMEOUT_SECONDS,TimeUnit.SECONDS)
                     .writeTimeout(WRITE_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     .readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS);
             if (mInterceptors != null) {

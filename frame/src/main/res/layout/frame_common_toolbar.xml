@@ -25,7 +25,7 @@
                 android:layout_height="22dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_back_black" />
+                android:src="@drawable/frame_ic_back_black" />
         </RelativeLayout>
 
         <TextView

@@ -1,6 +1,7 @@
 package com.obelieve.frame.net;
 
 import com.google.gson.reflect.TypeToken;
+import com.obelieve.frame.FrameManager;
 import com.obelieve.frame.net.download.DownloadInterface;
 import com.obelieve.frame.net.download.DownloadInterfaceImpl;
 import com.obelieve.frame.net.gson.MGson;
@@ -79,7 +80,7 @@ public class ApiService {
                 return upstream.flatMap(new Function<ApiBaseResponse<T>, Observable<ApiBaseResponse<T>>>() {
                     @Override
                     public Observable<ApiBaseResponse<T>> apply(@NonNull ApiBaseResponse<T> tBaseResponse) throws Exception {
-                        if (tBaseResponse.getCode() == ApiErrorCode.CODE_OK) {
+                        if (tBaseResponse.getCode() == FrameManager.apiSuccessCode()) {
                             try {
                                 T t = MGson.newGson().fromJson(tBaseResponse.getData(), tClass != null ? tClass : type.getType());
                                 tBaseResponse.setEntity(t);

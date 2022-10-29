@@ -49,7 +49,7 @@ public abstract class ApiBaseSubscribe<T> implements Observer<T> {
                     new SimpleAlertDialog(mActivity)
                             .setSimple(true)
                             .setContent(response.getMsg())
-                            .setOk(mActivity.getString(R.string.done)).show();
+                            .setOk(mActivity.getString(R.string.frame_done)).show();
                     isProcessed = true;
                 }
             }

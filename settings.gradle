@@ -1,4 +1,3 @@
-include ':thirdsdklib'
 include ':frame'
 include ':app'
 rootProject.name = "Frame"

@@ -53,8 +53,15 @@ final class ApiCustomGsonResponseBodyConverter implements Converter<ResponseBody
             if (jsonObject.has("window")) {
                 baseResponse.setWindow(jsonObject.optInt("window"));
             }
-            baseResponse.setMsg(jsonObject.optString("message"));
-            baseResponse.setData(jsonObject.optString("data"));
+            if (jsonObject.has("message")) {
+                baseResponse.setMsg(jsonObject.optString("message"));
+            }
+            if (jsonObject.has("msg")) {
+                baseResponse.setMsg(jsonObject.optString("msg"));
+            }
+            if (jsonObject.has("data")) {
+                baseResponse.setData(jsonObject.optString("data"));
+            }
             return baseResponse;
         } catch (Exception e) {
             e.printStackTrace();

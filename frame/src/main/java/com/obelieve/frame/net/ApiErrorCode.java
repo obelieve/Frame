@@ -28,18 +28,5 @@ public interface ApiErrorCode {
      * 未知错误
      */
     int CODE_UNKNOWN = -1;
-    /**
-     * 成功
-     */
-    int CODE_OK = 1;//200
-    /**
-     * 操作失败
-     */
-    int CODE_ERROR = 0;
-
-    /**
-     * token失效
-     */
-    int CODE_TOKEN_ERROR = 40001;
 
 }

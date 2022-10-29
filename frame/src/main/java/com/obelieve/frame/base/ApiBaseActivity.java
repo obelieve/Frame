@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
     private int mStatusBarColor = Color.WHITE;
     protected boolean mNeedInsetStatusBar = true;
     protected boolean mLightStatusBar = true;
+    protected boolean mFullScreen = false;
 
     protected T mViewBinding;
     protected VM mViewModel;
@@ -59,13 +61,26 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = this;
-        setScreenOrientation();
-        if (mNeedInsetStatusBar) {
-            StatusBarUtil.setStatusBarColor(this, getStatusBarColor());
-        } else {
-            StatusBarUtil.setStatusBarTranslucentStatus(this);
+        if(isFullScreen()){
+            StatusBarUtil.setWindowLightStatusBar(this, isLightStatusBar());
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            //检测系统UI显示变化，设置系统UI不显示
+            getWindow().getDecorView().setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+                @Override
+                public void onSystemUiVisibilityChange(int visibility) {
+                    StatusBarUtil.setFullScreen(ApiBaseActivity.this);
+                }
+            });
+        }else{
+            if (mNeedInsetStatusBar) {
+                StatusBarUtil.setStatusBarColor(this, getStatusBarColor());
+            } else {
+                StatusBarUtil.setStatusBarTranslucentStatus(this);
+            }
+            StatusBarUtil.setWindowLightStatusBar(this, isLightStatusBar());
         }
-        StatusBarUtil.setWindowLightStatusBar(this, isLightStatusBar());
+
         createLayoutView();
         createViewModel();
         initCreateAfterView(savedInstanceState);
@@ -98,7 +113,11 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
 
     protected abstract  void initViewModel();
 
-    protected void setScreenOrientation() {
+    /**
+     * 设置竖屏
+     */
+    protected void setScreenVerOrientation() {
+
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制竖屏
         } else {
@@ -108,6 +127,10 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
 
     public int getStatusBarColor() {
         return mStatusBarColor;
+    }
+
+    public boolean isFullScreen() {
+        return mFullScreen;
     }
 
     public boolean isLightStatusBar() {
@@ -154,18 +177,18 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
         }
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (PERMISSION_REQUEST_CODE == requestCode) {
             for (int i = 0; i < permissions.length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                    if (shouldShowRequestPermissionRationale(permissions[i])) {
-                        showTipsDialog(permissions);
-                    } else {
-                        showSettingDialog();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(permissions[i])) {
+                            showTipsDialog(permissions);
+                        } else {
+                            showSettingDialog();
+                        }
                     }
                     return;
                 }
@@ -193,10 +216,11 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
                     }
                 })
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            requestPermissions(permissions, PERMISSION_REQUEST_CODE);
+                        }
                     }
                 }).show();
     }
@@ -214,7 +238,6 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
                     }
                 })
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SystemIntentUtil.openAppSettings(mActivity);
@@ -231,7 +254,7 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
         TextView right_tip = findViewById(R.id.right_tip);
         if (style == Style.DARK) {
             if (left_icon != null) {
-                left_icon.setImageResource(R.drawable.ic_back_black);
+                left_icon.setImageResource(R.drawable.frame_ic_back_black);
             }
             if (title != null) {
                 title.setTextColor(getResources().getColor(R.color.common_black));
@@ -244,7 +267,7 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
             }
         } else if (style == Style.LIGHT) {
             if (left_icon != null) {
-                left_icon.setImageResource(R.drawable.ic_back_white);
+                left_icon.setImageResource(R.drawable.frame_ic_back_white);
             }
             if (title != null) {
                 title.setTextColor(getResources().getColor(R.color.white));
@@ -287,7 +310,7 @@ public abstract class ApiBaseActivity<T extends ViewBinding,VM extends ViewModel
         View left_layout = findViewById(R.id.left_layout);
         if (left_layout != null) {
             ImageView left_icon = findViewById(R.id.left_icon);
-            left_icon.setImageResource(R.drawable.ic_back_black);
+            left_icon.setImageResource(R.drawable.frame_ic_back_black);
             left_layout.setOnClickListener(onClickListener);
         }
 
