@@ -1,8 +1,12 @@
 package com.obelieve.frame.utils.info;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
@@ -12,6 +16,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import androidx.annotation.RequiresPermission;
+import androidx.core.content.ContextCompat;
 
 import com.obelieve.frame.utils.log.LogUtil;
 
@@ -886,4 +891,36 @@ public class NetworkUtil {
         }
         return LinkNetWorkType.UNKNOWN;
     }
+
+    /**
+     * 以太网是否连接
+     *
+     * @param context
+     */
+    @SuppressLint("MissingPermission")
+    public static Boolean isEthernetConnected(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        boolean result = false;
+            try{
+                int permission = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_NETWORK_STATE);
+                if(permission == PackageManager.PERMISSION_GRANTED) {
+                    Network[] allNetworks = cm.getAllNetworks();
+                    for(int i=0;i<allNetworks.length;i++){
+                        NetworkInfo network = cm.getNetworkInfo(allNetworks[i]);
+                        int type = network != null ? network.getType() : -1;
+                        boolean isConnected = network != null && network.isConnected();
+                        if(type == ConnectivityManager.TYPE_ETHERNET){
+                            result = isConnected;
+                            break;
+                        }
+                    }
+                }else{
+                    LogUtil.d(TAG, "isEthernetConnected(Context), ACCESS_NETWORK_STATE: PERMISSION_DENIED");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        return result;
+        }
 }
