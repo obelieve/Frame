@@ -3,6 +3,7 @@ package com.obelieve.frame.net.convert;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.obelieve.frame.net.ApiBaseResponse;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -44,8 +45,11 @@ public class ApiCustomGsonConverterFactory extends Converter.Factory {
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations,
                                                             Retrofit retrofit) {
-        TypeAdapter adapter = gson.getAdapter(TypeToken.get(type));
-        return new ApiCustomGsonResponseBodyConverter(gson, adapter);
+        if(getRawType(type)== ApiBaseResponse.class){
+            TypeAdapter adapter = gson.getAdapter(TypeToken.get(type));
+            return new ApiCustomGsonResponseBodyConverter(gson, adapter);
+        }
+        return null;
     }
 
     @Override
