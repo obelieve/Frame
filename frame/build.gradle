@@ -35,18 +35,14 @@ android {
 
 }
 
-
-task androidSourcesJar(type: Jar) {
-    classifier 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
 project.afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
-                artifact androidSourcesJar // optional sources
+                groupId = 'com.github.obelieve'
+                artifactId = 'frame'
+                version = '1.0.0'
             }
         }
     }
