@@ -41,7 +41,7 @@ project.afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'com.github.obelieve'
-                artifactId = 'frame'
+                artifactId = 'Frame'
                 version = '1.0.0'
             }
         }
