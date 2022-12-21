@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">frame</string>
+    <string name="frame_cancel">取消</string>
+    <string name="frame_confirm">确定</string>
+    <string name="frame_done">完成</string>
+    <string name="frame_get_it">知道了</string>
+</resources>
