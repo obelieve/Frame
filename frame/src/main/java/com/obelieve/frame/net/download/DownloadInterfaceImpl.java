@@ -34,10 +34,8 @@ public class DownloadInterfaceImpl implements DownloadInterface {
                         try {
                             RandomAccessFile randomFile = new RandomAccessFile(savePath, "rw");
                             randomFile.setLength(responseBody.contentLength());
-                            long half = responseBody.contentLength() / 2;
                             DownloadSubscriber downSubscriber = new DownloadSubscriber(responseBody.contentLength(), savePath, callback);
-                            downloadPart(0, half, fileUrl, savePath, callback)
-                                    .mergeWith(downloadPart(half, responseBody.contentLength(), fileUrl, savePath, callback))
+                            downloadPart(0, responseBody.contentLength(), fileUrl, savePath, callback)
                                     .subscribe(downSubscriber);
                         } catch (IOException e) {
                             e.printStackTrace();
