@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="base_custom_views_common_red">#FF4C44</color>
+    <color name="base_custom_views_white">#FFFFFF</color>
+    <color name="three_layer_bg_1_nor">#F0F0F0</color>
+    <color name="three_layer_bg_1_selected">#F7F7F7</color>
+    <color name="three_layer_bg_2_nor">#F7F7F7</color>
+    <color name="three_layer_bg_2_selected">#FFFFFF</color>
+    <color name="three_layer_text_color_nor">#333333</color>
+    <color name="three_layer_text_color_selected">#0077FF</color>
+</resources>

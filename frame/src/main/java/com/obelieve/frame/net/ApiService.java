@@ -1,10 +1,10 @@
 package com.obelieve.frame.net;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.obelieve.frame.FrameManager;
 import com.obelieve.frame.net.download.DownloadInterface;
 import com.obelieve.frame.net.download.DownloadInterfaceImpl;
-import com.obelieve.frame.net.gson.MGson;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -21,6 +21,8 @@ import okhttp3.ResponseBody;
 public class ApiService {
 
     private static DownloadInterfaceImpl sDownloadInterfaceImpl;
+
+    private static final Gson gson = new Gson();
 
     public static void setDownloadInterface(DownloadInterface downloadInterface) {
         sDownloadInterfaceImpl = new DownloadInterfaceImpl(downloadInterface);
@@ -82,7 +84,7 @@ public class ApiService {
                     public Observable<ApiBaseResponse<T>> apply(@NonNull ApiBaseResponse<T> tBaseResponse) throws Exception {
                         if (tBaseResponse.getCode() == FrameManager.apiSuccessCode()) {
                             try {
-                                T t = MGson.newGson().fromJson(tBaseResponse.getData(), tClass != null ? tClass : type.getType());
+                                T t = gson.fromJson(tBaseResponse.getData(), tClass != null ? tClass : type.getType());
                                 tBaseResponse.setEntity(t);
                                 return createData(tBaseResponse);
                             } catch (Exception e) {

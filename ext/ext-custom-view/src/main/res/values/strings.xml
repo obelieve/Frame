@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base_custom_views_empty_data_tips">no data</string>
+    <string name="base_custom_views_retry">Retry</string>
+    <string name="base_custom_views_sign_in_first_please">sign in first please</string>
+    <string name="base_custom_views_sign_in">Sign in</string>
+</resources>

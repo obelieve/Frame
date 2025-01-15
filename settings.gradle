@@ -1,3 +1,6 @@
 include ':frame'
 include ':sample'
+include ':ext:ext-custom-view'
+include ':ext:ext-recyclerviewadapter'
+include ':ext:ext-third-sdk'
 rootProject.name = "Frame"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        tools:text="名字"
+        android:textColor="#ff333333"
+        android:background="@drawable/sel_three_layer_bg_2"
+        android:paddingLeft="12dp"
+        android:textSize="14sp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"/>
+
+</FrameLayout>
