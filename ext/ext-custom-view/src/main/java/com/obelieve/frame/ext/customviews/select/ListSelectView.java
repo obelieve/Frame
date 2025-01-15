@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.obelieve.rvtools.BaseRecyclerViewAdapter;
+import com.obelieve.frame.ext.ExtRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +98,7 @@ public class ListSelectView extends FrameLayout {
         }
         rvContent.setLayoutManager(mLayoutManager);
         mAdapter = new ListSelectAdapter(getContext());
-        mAdapter.setItemClickCallback(new BaseRecyclerViewAdapter.OnItemClickCallback<IListSelectViewData>() {
+        mAdapter.setItemClickCallback(new ExtRecyclerViewAdapter.OnItemClickCallback<IListSelectViewData>() {
             @Override
             public void onItemClick(View view, IListSelectViewData data, int position) {
                 if (mSelectType == SINGLE_TYPE) {
@@ -135,7 +135,7 @@ public class ListSelectView extends FrameLayout {
         return list;
     }
 
-    public class ListSelectAdapter extends BaseRecyclerViewAdapter<IListSelectViewData> {
+    public class ListSelectAdapter extends ExtRecyclerViewAdapter<IListSelectViewData> {
 
 
         public ListSelectAdapter(Context context) {
@@ -159,7 +159,7 @@ public class ListSelectView extends FrameLayout {
      */
     public interface IListSelectView {
 
-        BaseRecyclerViewAdapter.BaseViewHolder genViewHolder(ViewGroup parent);
+        ExtRecyclerViewAdapter.BaseViewHolder genViewHolder(ViewGroup parent);
 
         void select(View view, boolean selected);
     }
