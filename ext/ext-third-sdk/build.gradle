@@ -43,18 +43,18 @@ repositories {
     }
 }
 
-//project.afterEvaluate {
-//    publishing {
-//        publications {
-//            release(MavenPublication) {
-//                from components.release
-//                groupId = 'com.github.obelieve'
-//                artifactId = 'ext-third-sdk'
-//                version = '1.0.0'
-//            }
-//        }
-//    }
-//}
+project.afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.obelieve'
+                artifactId = 'ext-third-sdk'
+                version = '1.0.0'
+            }
+        }
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])

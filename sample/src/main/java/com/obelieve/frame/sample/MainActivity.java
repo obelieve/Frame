@@ -1,8 +1,9 @@
-package com.obelieve.frame;
+package com.obelieve.frame.sample;
 
 
 import android.os.Bundle;
 
+import com.obelieve.frame.R;
 import com.obelieve.frame.base.ApiBaseActivity2;
 import com.obelieve.frame.databinding.ActivityMainBinding;
 

@@ -1,4 +1,4 @@
-package com.obelieve.frame;
+package com.obelieve.frame.sample;
 
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
