@@ -16,6 +16,7 @@ import androidx.viewbinding.ViewBinding;
 
 
 import com.obelieve.ext.customviews.R;
+import com.obelieve.frame.ext.ExtRecyclerViewAdapter;
 import com.obelieve.rvtools.BaseRecyclerViewAdapter;
 
 import java.util.List;
@@ -62,7 +63,7 @@ public class LeftRightRecyclerView<LData extends LeftRightRecyclerView.ILeftData
         mRightAdapter = new RightAdapter(getContext(), mRightViewHolderFactory);
         mRvLeft.setAdapter(mLeftAdapter);
         mRvRight.setAdapter(mRightAdapter);
-        mLeftAdapter.setItemClickCallback(new BaseRecyclerViewAdapter.OnItemClickCallback<LData>() {
+        mLeftAdapter.setItemClickCallback(new ExtRecyclerViewAdapter.OnItemClickCallback<LData>() {
             @Override
             public void onItemClick(View view, ILeftData data, int position) {
                 if (mLeftAdapter.getCurPosition() != position) {
@@ -78,7 +79,7 @@ public class LeftRightRecyclerView<LData extends LeftRightRecyclerView.ILeftData
                 }
             }
         });
-        mRightAdapter.setItemClickCallback(new BaseRecyclerViewAdapter.OnItemClickCallback<RData>() {
+        mRightAdapter.setItemClickCallback(new ExtRecyclerViewAdapter.OnItemClickCallback<RData>() {
             @Override
             public void onItemClick(View view, RData data, int position) {
                 if (mCallback != null) {
@@ -137,7 +138,7 @@ public class LeftRightRecyclerView<LData extends LeftRightRecyclerView.ILeftData
         return mRvRight;
     }
 
-    public static class LeftAdapter<LData extends ILeftData> extends BaseRecyclerViewAdapter<LData> {
+    public static class LeftAdapter<LData extends ILeftData> extends ExtRecyclerViewAdapter<LData> {
 
         private int mCurPosition = 0;
         private String mCurLRRVTAG="";
@@ -187,7 +188,7 @@ public class LeftRightRecyclerView<LData extends LeftRightRecyclerView.ILeftData
 
     }
 
-    public static class RightAdapter<RData extends IRightData> extends BaseRecyclerViewAdapter<RData> {
+    public static class RightAdapter<RData extends IRightData> extends ExtRecyclerViewAdapter<RData> {
 
         private RightViewHolderFactory<IRightData> mFactory;
 
@@ -241,7 +242,7 @@ public class LeftRightRecyclerView<LData extends LeftRightRecyclerView.ILeftData
         RightViewHolder<DATA> genRightViewHolder(ViewGroup parent);
     }
 
-    public abstract static class LeftViewHolder<DATA extends ILeftData> extends BaseRecyclerViewAdapter.BaseViewHolder {
+    public abstract static class LeftViewHolder<DATA extends ILeftData> extends ExtRecyclerViewAdapter.BaseViewHolder {
 
         public LeftViewHolder(ViewBinding viewBinding) {
             super(viewBinding);
@@ -254,7 +255,7 @@ public class LeftRightRecyclerView<LData extends LeftRightRecyclerView.ILeftData
         public abstract void bind(DATA data);
     }
 
-    public abstract static class RightViewHolder<DATA extends IRightData> extends BaseRecyclerViewAdapter.BaseViewHolder {
+    public abstract static class RightViewHolder<DATA extends IRightData> extends ExtRecyclerViewAdapter.BaseViewHolder {
 
 
         public RightViewHolder(ViewBinding viewBinding) {

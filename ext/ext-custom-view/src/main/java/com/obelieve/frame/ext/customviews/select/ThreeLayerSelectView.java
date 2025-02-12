@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.obelieve.ext.customviews.R;
-import com.obelieve.rvtools.BaseRecyclerViewAdapter;
+import com.obelieve.frame.ext.ExtRecyclerViewAdapter;
+
 
 import java.util.List;
 
@@ -82,7 +83,7 @@ public class ThreeLayerSelectView extends FrameLayout {
         rvLayer1.setAdapter(mLayer1Adapter);
         rvLayer2.setAdapter(mLayer2Adapter);
         rvLayer3.setAdapter(mLayer3Adapter);
-        mLayer1Adapter.setItemClickCallback(new BaseRecyclerViewAdapter.OnItemClickCallback<Select1Entity>() {
+        mLayer1Adapter.setItemClickCallback(new ExtRecyclerViewAdapter.OnItemClickCallback<Select1Entity>() {
             @Override
             public void onItemClick(View view, Select1Entity entity, int position) {
                 if (mSelect1EntityList.get(mPos1[0]) != null &&
@@ -96,7 +97,7 @@ public class ThreeLayerSelectView extends FrameLayout {
                 }
             }
         });
-        mLayer2Adapter.setItemClickCallback(new BaseRecyclerViewAdapter.OnItemClickCallback<Select2Entity>() {
+        mLayer2Adapter.setItemClickCallback(new ExtRecyclerViewAdapter.OnItemClickCallback<Select2Entity>() {
             @Override
             public void onItemClick(View view, Select2Entity entity, int position) {
                 if (mSelect1EntityList.get(mPos2[0]) != null &&
@@ -110,7 +111,7 @@ public class ThreeLayerSelectView extends FrameLayout {
                 }
             }
         });
-        mLayer3Adapter.setItemClickCallback(new BaseRecyclerViewAdapter.OnItemClickCallback<Select3Entity>() {
+        mLayer3Adapter.setItemClickCallback(new ExtRecyclerViewAdapter.OnItemClickCallback<Select3Entity>() {
             @Override
             public void onItemClick(View view, Select3Entity entity, int position) {
                 if (mSelect1EntityList.get(mPos3[0]) != null &&
@@ -266,7 +267,7 @@ public class ThreeLayerSelectView extends FrameLayout {
         return position;
     }
 
-    public static class Layer1Adapter extends BaseRecyclerViewAdapter<Select1Entity> {
+    public static class Layer1Adapter extends ExtRecyclerViewAdapter<Select1Entity> {
 
         public Layer1Adapter(Context context) {
             super(context);
@@ -296,7 +297,7 @@ public class ThreeLayerSelectView extends FrameLayout {
         }
     }
 
-    public static class Layer2Adapter extends BaseRecyclerViewAdapter<Select2Entity> {
+    public static class Layer2Adapter extends ExtRecyclerViewAdapter<Select2Entity> {
 
         public Layer2Adapter(Context context) {
             super(context);
@@ -326,7 +327,7 @@ public class ThreeLayerSelectView extends FrameLayout {
         }
     }
 
-    public static class Layer3Adapter extends BaseRecyclerViewAdapter<Select3Entity> {
+    public static class Layer3Adapter extends ExtRecyclerViewAdapter<Select3Entity> {
 
         public Layer3Adapter(Context context) {
             super(context);
