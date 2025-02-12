@@ -3,4 +3,5 @@ include ':sample'
 include ':ext:ext-custom-view'
 include ':ext:ext-recyclerviewadapter'
 include ':ext:ext-third-sdk'
+include ':ext:ext-third-sdk:aar-alipay'
 rootProject.name = "Frame"
