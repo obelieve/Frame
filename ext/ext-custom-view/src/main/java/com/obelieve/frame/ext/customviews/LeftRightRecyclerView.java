@@ -17,7 +17,6 @@ import androidx.viewbinding.ViewBinding;
 
 import com.obelieve.ext.customviews.R;
 import com.obelieve.frame.ext.ExtRecyclerViewAdapter;
-import com.obelieve.rvtools.BaseRecyclerViewAdapter;
 
 import java.util.List;
 
